@@ -38,3 +38,9 @@ func (c Recursion) Retrieve(recid string) (*simplejson.Json, error) {
 
 	return c.webpayclient.Get(path, url.Values{})
 }
+
+// All returnes customer list filtered by params.
+func (c Recursion) All(args map[string]int) (*simplejson.Json, error) {
+	path := getAllPathWithQuery(c.path, args)
+	return c.webpayclient.Get(path, url.Values{})
+}

@@ -1,6 +1,7 @@
 package webpay
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -8,11 +9,11 @@ import (
 )
 
 func Test_ChargeCreate(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Charge.Create(
 		400.0,
 		"jpy",
-		testCard,
+		TestCard,
 	)
 	assert.Nil(t, err)
 
@@ -23,15 +24,42 @@ func Test_ChargeCreate(t *testing.T) {
 }
 
 func Test_ChargeRetrieve(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
-	ret, err := client.Charge.Retrieve("ch_3u32gEgiy2xjfEf")
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Charge.Retrieve(TestCharge)
+	assert.Nil(t, err)
+
+	b, err := GetId(ret)
+	assert.Nil(t, err)
+	assert.NotEmpty(t, b)
+	assert.Equal(t, TestCharge, b)
+
+	//	m, _ := ret.MarshalJSON()
+	// fmt.Println(string(m))
+}
+
+func Test_ChargeCreateByCustomer(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Charge.CreateByCustomer(
+		400.0,
+		"jpy",
+		TestCustomer,
+	)
 	assert.Nil(t, err)
 
 	b, err := GetId(ret)
 	assert.Nil(t, err)
 	assert.NotEmpty(t, b)
 	assert.True(t, strings.HasPrefix(b, "ch_"))
+}
 
-	//	m, _ := ret.MarshalJSON()
-	// fmt.Println(string(m))
+func Test_ChargeAll(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Charge.All(map[string]int{
+		"count": 5,
+		"gt":    1412751347, // TODO: How to specify?
+	})
+	assert.Nil(t, err)
+
+	m, _ := ret.MarshalJSON()
+	fmt.Println(string(m))
 }

@@ -1,6 +1,7 @@
 package webpay
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -8,11 +9,11 @@ import (
 )
 
 func Test_RecursionCreate(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Recursion.Create(
 		400.0,
 		"jpy",
-		"cus_45d3MV5phaXJ4uv",
+		TestCustomer,
 		"month",
 		"説明",
 	)
@@ -28,12 +29,24 @@ func Test_RecursionCreate(t *testing.T) {
 }
 
 func Test_RecursionRetrieve(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
-	ret, err := client.Recursion.Retrieve("rec_8hla3E10n2T84Ne")
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Recursion.Retrieve(TestRecursion)
 	assert.Nil(t, err)
 
 	b, err := GetId(ret)
 	assert.Nil(t, err)
 	assert.NotEmpty(t, b)
-	assert.True(t, strings.HasPrefix(b, "rec_"))
+	assert.Equal(t, TestRecursion, b)
+}
+
+func Test_RecursionAll(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Recursion.All(map[string]int{
+		"count": 5,
+		"gt":    1412751347, // TODO: How to specify?
+	})
+	assert.Nil(t, err)
+
+	m, _ := ret.MarshalJSON()
+	fmt.Println(string(m))
 }

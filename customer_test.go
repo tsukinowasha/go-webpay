@@ -9,9 +9,9 @@ import (
 )
 
 func Test_CustomerCreate(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Customer.Create(
-		testCard,
+		TestCard,
 	)
 	assert.Nil(t, err)
 
@@ -21,15 +21,29 @@ func Test_CustomerCreate(t *testing.T) {
 	assert.True(t, strings.HasPrefix(b, "cus_"))
 }
 
-func Test_CustomerAll(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
-	ret, err := client.Customer.All(
-		3,
-		0,
-		map[string]int{},
+func Test_CustomerDelete(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Customer.Delete(
+		TestCustomer,
 	)
 	assert.Nil(t, err)
+	if TestMode == "real" {
+		// not test
+	} else {
+		b, err := GetId(ret)
+		assert.Nil(t, err)
+		assert.NotEmpty(t, b)
+		assert.True(t, strings.HasPrefix(b, "cus_"))
+	}
+}
 
-	m, _ := ret.MarshalJSON()
-	fmt.Println(string(m))
+func Test_CustomerAll(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Customer.All(map[string]int{
+		"count": 5,
+		"gt":    1412751347, // TODO: How to specify?
+	})
+	assert.Nil(t, err)
+
+	fmt.Sprintf("%v", ret)
 }

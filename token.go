@@ -10,8 +10,6 @@ import (
 type Token struct {
 	webpayclient *WebPayClient
 	path         string
-	//	params       url.Values
-	//	card         Card
 }
 
 func NewToken(cli *WebPayClient) Token {

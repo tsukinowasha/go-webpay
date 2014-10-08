@@ -1,0 +1,18 @@
+{
+  "id": "tok_3ybc93ckR01qeKx",
+  "object": "token",
+  "livemode": false,
+  "created": 1396007350,
+  "used": false,
+  "card": {
+    "object": "card",
+    "exp_year": 2015,
+    "exp_month": 8,
+    "fingerprint": "215b5b2fe460809b8bb90bae6eeac0e0e0987bd7",
+    "name": "KENGO HAMASAKI",
+    "country": "JP",
+    "type": "Visa",
+    "cvc_check": "pass",
+    "last4": "4242"
+  }
+}

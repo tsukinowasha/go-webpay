@@ -1,0 +1,48 @@
+{
+  "id": "evt_cFRc4s9FD7BE1Ox",
+  "object": "event",
+  "livemode": false,
+  "type": "charge.succeeded",
+  "created": 1404978357,
+  "data": {
+    "object": {
+      "id": "ch_cFRc4s30I5Xk4vH",
+      "object": "charge",
+      "livemode": false,
+      "currency": "jpy",
+      "description": null,
+      "amount": 51,
+      "amount_refunded": 0,
+      "customer": null,
+      "recursion": null,
+      "created": 1404978357,
+      "paid": true,
+      "refunded": false,
+      "failure_message": null,
+      "card": {
+        "object": "card",
+        "exp_year": 2015,
+        "exp_month": 9,
+        "fingerprint": "215b5b2fe460809b8bb90bae6eeac0e0e0987bd7",
+        "name": "Tobias Luetke",
+        "country": "JP",
+        "type": "Visa",
+        "cvc_check": "pass",
+        "last4": "4242"
+      },
+      "captured": true,
+      "expire_time": null,
+      "fees": [
+        {
+          "object": "fee",
+          "transaction_type": "payment",
+          "transaction_fee": 0,
+          "rate": 3.25,
+          "amount": 2,
+          "created": 1404978357
+        }
+      ]
+    }
+  },
+  "pending_webhooks": 0
+}

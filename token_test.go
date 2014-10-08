@@ -8,10 +8,10 @@ import (
 )
 
 func Test_TokenCreate(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Token.Create(
 		"", // If UUID can be empty
-		testCard,
+		TestCard,
 	)
 	assert.Nil(t, err)
 
@@ -22,8 +22,8 @@ func Test_TokenCreate(t *testing.T) {
 }
 
 func Test_TokenRetrieve(t *testing.T) {
-	client := NewWebPayClient(TestAuthToken)
-	ret, err := client.Token.Retrieve("tok_3ybc93ckR01qeKx")
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Token.Retrieve(TestToken)
 	assert.Nil(t, err)
 
 	b, err := GetId(ret)

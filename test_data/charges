@@ -1,0 +1,31 @@
+{
+  "id": "ch_3u32gEgiy2xjfEf",
+  "object": "charge",
+  "livemode": false,
+  "currency": "jpy",
+  "description": "",
+  "amount": 400,
+  "amount_refunded": 0,
+  "customer": null,
+  "recursion": null,
+  "created": 1395920930,
+  "paid": true,
+  "refunded": false,
+  "failure_message": null,
+  "card": {
+    "object": "card",
+    "exp_year": 2014,
+    "exp_month": 11,
+    "fingerprint": "215b5b2fe460809b8bb90bae6eeac0e0e0987bd7",
+    "name": "KEI KUBO",
+    "country": "JP",
+    "type": "Visa",
+    "cvc_check": "pass",
+    "last4": "4242"
+  },
+  "captured": true,
+  "expire_time": null,
+  "fees": [
+
+  ]
+}

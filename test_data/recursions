@@ -1,0 +1,14 @@
+{
+  "id": "rec_8hla3E10n2T84Ne",
+  "object": "recursion",
+  "livemode": false,
+  "created": 1400638103,
+  "amount": 400,
+  "currency": "jpy",
+  "period": "month",
+  "description": "WebPayマガジン購読料",
+  "customer": "cus_45d3MV5phaXJ4uv",
+  "last_executed": 1411265442,
+  "next_scheduled": 1413857303,
+  "status": "active"
+}

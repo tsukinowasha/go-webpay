@@ -1,9 +1,8 @@
 package webpay
 
 import (
-	"fmt"
 	"net/url"
-	"strconv"
+	"strings"
 
 	"github.com/bitly/go-simplejson"
 )
@@ -22,35 +21,22 @@ func NewCustomer(cli *WebPayClient) Customer {
 	return ret
 }
 
-// Create creates new Charge.
+// Create creates new Customer.
 func (c Customer) Create(card Card) (*simplejson.Json, error) {
 	params := card.AddParams(url.Values{})
 
 	return c.webpayclient.Post(c.path, params)
 }
 
+// Delete deltes a Customer.
+func (c Customer) Delete(customerId string) (*simplejson.Json, error) {
+	path := strings.Join([]string{c.path, customerId}, "/")
+
+	return c.webpayclient.Delete(path, url.Values{})
+}
+
 // All returnes customer list filtered by params.
-func (c Customer) All(count int, offset int, created map[string]int) (*simplejson.Json, error) {
-	query := url.Values{}
-	if count > 0 {
-		query.Add("count", strconv.Itoa(count))
-	}
-	if offset > 0 {
-		query.Add("offset", strconv.Itoa(offset))
-	}
-	/*
-	    // TODO: How to set dict
-		if len(created) > 0 {
-			for c, t := range created {
-				query.Add(c, t)
-			}
-		}
-	*/
-
-	if offset <= 0 {
-		offset = 0
-	}
-	path := fmt.Sprintf("%s?%s", c.path, query.Encode())
-
+func (c Customer) All(args map[string]int) (*simplejson.Json, error) {
+	path := getAllPathWithQuery(c.path, args)
 	return c.webpayclient.Get(path, url.Values{})
 }

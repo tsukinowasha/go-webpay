@@ -1,0 +1,18 @@
+{
+  "object": "account",
+  "id": "acct_7Kh0pZ7ufeE7g0F",
+  "email": "hmsk@webpay.jp",
+  "statement_descriptor": null,
+  "details_submitted": false,
+  "charge_enabled": false,
+  "currencies_supported": [
+    "jpy"
+  ],
+  "card_types_supported": [
+    "Visa",
+    "American Express",
+    "MasterCard",
+    "JCB",
+    "Diners Club"
+  ]
+}

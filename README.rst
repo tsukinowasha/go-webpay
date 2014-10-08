@@ -1,12 +1,9 @@
 webpay library for golang
 ================================================
 
-This is a library for a WebPay(https://webpay.jp/)
+This is a **unofficial** library for WebPay (https://webpay.jp/)
 
-Note:
-  This is an unofficial library. 
-
-godoc 
+godoc : http://godoc.org/github.com/tsukinowasha/go-webpay
 
 
 Install
@@ -39,6 +36,38 @@ Usage
 
   chargeId, _ := GetId(ret)
 
+Difference
+-----------------
+
+ByCustomer
+++++++++++++++++++
+
+Webpay can charge not only by the Card but also Customer Id. The
+official library can use same function to both.
+
+However golang does not permit it. In this library, you should use
+another function.
+
+::
+
+  client := webpay.NewWebPayClient("YOUR_AUTH_TOKEN")
+  ret, err := client.Charge.CreateByCustomer(400.0, "jpy", "cus_45d3MV5xxxxxxv")
+
+
+All
+++++++++++++++++++
+
+Customer or other list can be acquired with count, offset or created arguments.
+These args can be empty.
+
+In this library, arguments are map[string]int.
+
+::
+
+  ret, err := client.Customer.All(map[string]int{
+
+  })
+
 
 Current Status
 ------------------------
@@ -46,38 +75,45 @@ Current Status
 - Charge
 
   - Create: done
+  - CreateByCustomer: done
   - Retrieve: done
+  - Refund: notyet
+  - Capture: notyet
+  - all: done
 
 - Customer
 
   - Create: done
   - Retrieve: done
   - Update: notyet
-  - delete: notyet
-  - all: notyet
+  - delete: done
+  - all: done
   - delete_active_card: notyet
-
-- Recursion
-
-  - Create: done
-  - Retrieve: done
 
 - Token
 
   - Create: done
   - Retrieve: done
 
+- Recursion
+
+  - Create: done
+  - Retrieve: done
+  - Resume: notyet
+  - delete: notyet
+  - all: done
+
 - Account
 
-  not yet
+  - Retrieve: done
+  - Delete: notyet
 
 - Event
 
-  not yet
+  - Retrieve: done
+  - All: done
 
-- Shop
-
-  not yet
+- Shop ?
 
 LICENSE
 -----------
