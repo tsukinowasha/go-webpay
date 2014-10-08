@@ -4,11 +4,11 @@ package webpay
 var TestMode = "mock"
 
 var TestCard = Card{
-	number:    "4242-4242-4242-4242",
-	exp_month: 11,
-	exp_year:  2014,
-	cvc:       "123",
-	name:      "KEI KUBO",
+	Number:    "4242-4242-4242-4242",
+	Exp_month: 11,
+	Exp_year:  2015,
+	Cvc:       "123",
+	Name:      "John Doe",
 }
 
 var TestAuthToken = "test_secret_eHn4TTgsGguBcW764a2KA8Yd"

@@ -19,22 +19,21 @@ Usage
 
 ::
 
-  import "github.com/tsukinowasha/go-webpay"
+   client := webpay.NewWebPayClient("YOUR_AUTH_TOKEN")
+   ret, _ := client.Charge.Create(
+       400.0,
+      "jpy",
+       webpay.Card{
+           Number:    "4242-4242-4242-4242",
+           Exp_month: 11,
+           Exp_year:  2015,
+           Cvc:       "123",
+           Name:      "John Doe",
+       },
+   )
 
-  client := webpay.NewWebPayClient("YOUR_AUTH_TOKEN")
-  ret, err := client.Charge.Create(
-    400.0,
-    "jpy",
-    Card{
-        number:    "4242-4242-4242-4242",
-        exp_month: 11,
-        exp_year:  2014,
-        cvc:       "123",
-        name:      "KEI KUBO",
-    },
-  )
-
-  chargeId, _ := GetId(ret)
+   chargeId, _ := webpay.GetId(ret)
+   fmt.Println(chargeId)
 
 Difference
 -----------------
