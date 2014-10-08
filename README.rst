@@ -64,8 +64,9 @@ In this library, arguments are map[string]int.
 
 ::
 
-  ret, err := client.Customer.All(map[string]int{
-
+  ret, err := client.Charge.All(map[string]int{
+      "count": 5,
+      "gt":    1412751347,
   })
 
 
