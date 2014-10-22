@@ -1,5 +1,10 @@
 webpay library for golang
 ================================================
+.. image:: https://drone.io/github.com/tsukinowasha/go-webpay/status.png
+   :target: https://drone.io/github.com/tsukinowasha/go-webpay/status.png
+
+.. image:: https://coveralls.io/repos/tsukinowasha/go-webpay/badge.png?branch=master
+   :target: https://coveralls.io/r/tsukinowasha/go-webpay?branch=master
 
 This is a **unofficial** library for WebPay (https://webpay.jp/)
 
@@ -44,13 +49,20 @@ ByCustomer
 Webpay can charge not only by the Card but also Customer Id. The
 official library can use same function to both.
 
-However golang does not permit it. In this library, you should use
+But golang does not permit it. In this library, you should use
 another function.
 
 ::
 
   client := webpay.NewWebPayClient("YOUR_AUTH_TOKEN")
   ret, err := client.Charge.CreateByCustomer(400.0, "jpy", "cus_45d3MV5xxxxxxv")
+
+Same as CustomerByToken.
+
+::
+
+  client := webpay.NewWebPayClient("YOUR_AUTH_TOKEN")
+  ret, err := client.Customer.CreateByToken("tok_34M4Vxxxxxxv")
 
 
 All

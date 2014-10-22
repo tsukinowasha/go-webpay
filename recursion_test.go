@@ -1,7 +1,6 @@
 package webpay
 
 import (
-	"fmt"
 	"strings"
 	"testing"
 
@@ -47,6 +46,8 @@ func Test_RecursionAll(t *testing.T) {
 	})
 	assert.Nil(t, err)
 
-	m, _ := ret.MarshalJSON()
-	fmt.Println(string(m))
+	m, err := ret.MarshalJSON()
+	assert.Nil(t, err)
+	assert.NotEmpty(t, m)
+	//fmt.Println(string(m))
 }

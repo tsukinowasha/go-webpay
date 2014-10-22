@@ -21,6 +21,19 @@ func Test_CustomerCreate(t *testing.T) {
 	assert.True(t, strings.HasPrefix(b, "cus_"))
 }
 
+func Test_CustomerCreateByToken(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Customer.CreateByCustomer(
+		TestToken,
+	)
+	assert.Nil(t, err)
+
+	b, err := GetId(ret)
+	assert.Nil(t, err)
+	assert.NotEmpty(t, b)
+	assert.True(t, strings.HasPrefix(b, "cus_"))
+}
+
 func Test_CustomerDelete(t *testing.T) {
 	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Customer.Delete(

@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/bitly/go-simplejson"
+	simplejson "github.com/bitly/go-simplejson"
 )
 
 type Customer struct {
@@ -39,4 +39,12 @@ func (c Customer) Delete(customerId string) (*simplejson.Json, error) {
 func (c Customer) All(args map[string]int) (*simplejson.Json, error) {
 	path := getAllPathWithQuery(c.path, args)
 	return c.webpayclient.Get(path, url.Values{})
+}
+
+// CreateByToken creates Customer from the token.
+func (c Customer) CreateByCustomer(token string) (*simplejson.Json, error) {
+	params := url.Values{}
+	params.Add("card", token)
+
+	return c.webpayclient.Post(c.path, params)
 }

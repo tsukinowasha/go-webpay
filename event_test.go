@@ -1,7 +1,6 @@
 package webpay
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -17,8 +16,10 @@ func Test_EventRetrieve(t *testing.T) {
 	assert.NotEmpty(t, b)
 	assert.Equal(t, TestEvent, b)
 
-	m, _ := ret.MarshalJSON()
-	fmt.Println(string(m))
+	m, err := ret.MarshalJSON()
+	assert.Nil(t, err)
+	assert.NotEmpty(t, m)
+	//fmt.Println(string(m))
 }
 
 func Test_EventAll(t *testing.T) {
@@ -29,6 +30,8 @@ func Test_EventAll(t *testing.T) {
 	})
 	assert.Nil(t, err)
 
-	m, _ := ret.MarshalJSON()
-	fmt.Println(string(m))
+	m, err := ret.MarshalJSON()
+	assert.Nil(t, err)
+	assert.NotEmpty(t, m)
+	//fmt.Println(string(m))
 }
