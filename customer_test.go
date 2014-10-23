@@ -12,6 +12,8 @@ func Test_CustomerCreate(t *testing.T) {
 	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Customer.Create(
 		TestCard,
+		"",
+		"",
 	)
 	assert.Nil(t, err)
 

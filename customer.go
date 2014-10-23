@@ -22,8 +22,10 @@ func NewCustomer(cli *WebPayClient) Customer {
 }
 
 // Create creates new Customer.
-func (c Customer) Create(card Card) (*simplejson.Json, error) {
+func (c Customer) Create(card Card, email, description string) (*simplejson.Json, error) {
 	params := card.AddParams(url.Values{})
+	params.Add("email", email)
+	params.Add("description", description)
 
 	return c.webpayclient.Post(c.path, params)
 }
