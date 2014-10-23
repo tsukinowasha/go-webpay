@@ -42,9 +42,11 @@ func (c Customer) All(args map[string]int) (*simplejson.Json, error) {
 }
 
 // CreateByToken creates Customer from the token.
-func (c Customer) CreateByToken(token string) (*simplejson.Json, error) {
+func (c Customer) CreateByToken(token, email, description string) (*simplejson.Json, error) {
 	params := url.Values{}
 	params.Add("card", token)
+	params.Add("email", email)
+	params.Add("description", description)
 
 	return c.webpayclient.Post(c.path, params)
 }
