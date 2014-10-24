@@ -51,7 +51,15 @@ func (c Charge) Retrieve(chid string) (*simplejson.Json, error) {
 }
 
 // All returnes customer list filtered by params.
-func (c Charge) All(args map[string]int) (*simplejson.Json, error) {
+func (c Charge) All(args map[string]int, customer, recursion string) (*simplejson.Json, error) {
 	path := getAllPathWithQuery(c.path, args)
+
+	if customer != ""{
+		path += "&customer=" + customer
+	}
+	if recursion != ""{
+		path += "&recursion=" + recursion
+	}
+
 	return c.webpayclient.Get(path, url.Values{})
 }

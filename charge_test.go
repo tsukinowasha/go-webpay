@@ -56,7 +56,10 @@ func Test_ChargeAll(t *testing.T) {
 	ret, err := client.Charge.All(map[string]int{
 		"count": 5,
 		"gt":    1412751347, // TODO: How to specify?
-	})
+	},
+		"",
+		"",
+	)
 	assert.Nil(t, err)
 
 	m, err := ret.MarshalJSON()
