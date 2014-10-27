@@ -92,7 +92,7 @@ func (cli WebPayClient) Request(method, path string, params url.Values) (*simple
 		return nil, err
 	}
 
-	//	fmt.Println(string(body))
+	// fmt.Println(string(body))
 
 	js, err := simplejson.NewJson(body)
 	if err != nil {

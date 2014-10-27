@@ -39,6 +39,13 @@ func (c Recursion) Retrieve(recid string) (*simplejson.Json, error) {
 	return c.webpayclient.Get(path, url.Values{})
 }
 
+// Delete deltes a Recursion.
+func (c Recursion) Delete(recursionId string) (*simplejson.Json, error) {
+	path := strings.Join([]string{c.path, recursionId}, "/")
+
+	return c.webpayclient.Delete(path, url.Values{})
+}
+
 // All returnes customer list filtered by params.
 func (c Recursion) All(args map[string]int) (*simplejson.Json, error) {
 	path := getAllPathWithQuery(c.path, args)

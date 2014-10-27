@@ -38,6 +38,21 @@ func Test_RecursionRetrieve(t *testing.T) {
 	assert.Equal(t, TestRecursion, b)
 }
 
+func Test_RecursionDelete(t *testing.T) {
+	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
+	ret, err := client.Recursion.Delete(TestRecursion)
+	assert.Nil(t, err)
+
+	if TestMode == "real" {
+		// not test
+	} else {
+		b, err := GetId(ret)
+		assert.Nil(t, err)
+		assert.NotEmpty(t, b)
+		assert.Equal(t, TestRecursion, b)
+	}
+}
+
 func Test_RecursionAll(t *testing.T) {
 	client := NewWebPayClientForTesting(TestMode, TestAuthToken)
 	ret, err := client.Recursion.All(map[string]int{

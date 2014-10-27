@@ -44,6 +44,7 @@ func Test_CustomerDelete(t *testing.T) {
 		TestCustomer,
 	)
 	assert.Nil(t, err)
+
 	if TestMode == "real" {
 		// not test
 	} else {
