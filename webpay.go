@@ -1,6 +1,7 @@
 package webpay
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -69,9 +70,18 @@ func (cli WebPayClient) Request(method, path string, params url.Values) (*simple
 		return cli.returnMockJson(method, path, params)
 	}
 
-	client := &http.Client{}
-
 	u := cli.options["api_base"] + "/" + path
+
+	var client *http.Client
+	if strings.HasPrefix(u, "https://") {
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+		client = &http.Client{Transport: tr}
+	} else {
+		client = &http.Client{}
+	}
+
 	req, _ := http.NewRequest(
 		method,
 		u,
